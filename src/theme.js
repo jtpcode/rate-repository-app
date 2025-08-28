@@ -5,6 +5,9 @@ const theme = {
     primary: "#0366d6",
     appBar: "#24292e",
     appBarTab: "#ffffff",
+    mainBackground: "#e1e4e8",
+    repositoryItemBackground: "#ffffff",
+    repositoryItemLanguageTag: "#0366d6",
   },
   fontSizes: {
     body: 14,
@@ -15,7 +18,7 @@ const theme = {
   },
   fontWeights: {
     normal: "400",
-    bold: "700",
+    bold: "800",
   },
 };
 
