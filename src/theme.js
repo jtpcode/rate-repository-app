@@ -2,6 +2,7 @@ const theme = {
   colors: {
     textPrimary: "#24292e",
     textSecondary: "#586069",
+    textError: "#d73a4a",
     primary: "#0366d6",
     appBar: "#24292e",
     appBarTab: "#ffffff",

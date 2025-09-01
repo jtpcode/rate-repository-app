@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
   },
-  badge: {
+  languageTag: {
     alignSelf: "flex-start",
     backgroundColor: theme.colors.repositoryItemLanguageTag,
     color: "#ffffff",
@@ -51,7 +51,7 @@ const RepositoryItem = ({ repository }) => (
       <View style={styles.infoBox}>
         <Text fontWeight="bold">{repository.fullName}</Text>
         <Text>{repository.description}</Text>
-        <Text style={styles.badge}>{repository.language}</Text>
+        <Text style={styles.languageTag}>{repository.language}</Text>
       </View>
     </View>
     <View style={styles.statsRow}>
