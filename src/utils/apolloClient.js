@@ -1,12 +1,32 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import Constants from "expo-constants";
+import { setContext } from "@apollo/client/link/context";
 
-const createApolloClient = () => {
+const { apolloUri } = Constants.expoConfig.extra;
+
+const httpLink = new HttpLink({
+  uri: apolloUri,
+});
+
+const createApolloClient = (authStorage) => {
+  const authLink = setContext(async (_, { headers }) => {
+    try {
+      const accessToken = await authStorage.getAccessToken();
+      return {
+        headers: {
+          ...headers,
+          authorization: accessToken ? `Bearer ${accessToken}` : "",
+        },
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        headers,
+      };
+    }
+  });
   return new ApolloClient({
-    // uri: "https://countries.trevorblades.com/",
-    // uri: "https://a83cc44cf912.ngrok-free.app/graphql",
-    uri: Constants.expoConfig.extra.apolloUri,
-    // link: new HttpLink({ uri: "http://192.168.38.102:4000/graphql" }),
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
 };
