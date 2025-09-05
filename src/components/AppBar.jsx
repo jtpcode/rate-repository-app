@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, StyleSheet, ScrollView, Pressable, Text } from "react-native";
 import { Link, useNavigate } from "react-router-native";
 import Constants from "expo-constants";
 import { useQuery } from "@apollo/client";
@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
   colorBackground: {
     backgroundColor: theme.colors.appBar,
   },
+  scrollView: {
+    flexGrow: 1,
+  },
+  text: {
+    color: theme.colors.textSecondary,
+  },
 });
 
 const AppBar = () => {
@@ -28,9 +34,9 @@ const AppBar = () => {
   const apolloClient = useApolloClient();
   const navigate = useNavigate();
 
-  const handleSignOut = async () => {
+  const signOut = async () => {
     await authStorage.removeAccessToken();
-    await apolloClient.resetStore();
+    apolloClient.resetStore();
     navigate("/signin");
   };
 
@@ -41,15 +47,20 @@ const AppBar = () => {
       <ScrollView
         horizontal
         contentContainerStyle={{ flexDirection: "row", alignItems: "center" }}
-        style={{ flexGrow: 1 }}
+        style={styles.scrollView}
       >
         <Link to="/" underlayColor="transparent">
           <AppBarTab label="Repositories" style={styles.itemTab} />
         </Link>
         {isSignedIn ? (
-          <Pressable onPress={handleSignOut}>
-            <AppBarTab label="Sign Out" style={styles.itemTab} />
-          </Pressable>
+          <>
+            <Link to="/create-review" underlayColor="transparent">
+              <AppBarTab label="Create a review" style={styles.itemTab} />
+            </Link>
+            <Pressable onPress={signOut}>
+              <Text style={styles.text}>Sign out</Text>
+            </Pressable>
+          </>
         ) : (
           <Link to="/signin" underlayColor="transparent">
             <AppBarTab label="Sign In" style={styles.itemTab} />
