@@ -1,5 +1,7 @@
-import { View, Image, StyleSheet, Button } from "react-native";
-import * as Linking from "expo-linking";
+import { View, Image, StyleSheet, Button, Linking } from "react-native";
+
+// This doesn't work in the Expo Go app
+// import * as Linking from "expo-linking";
 
 import Text from "./Text";
 import theme from "../theme";

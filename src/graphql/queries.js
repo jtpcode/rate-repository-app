@@ -25,6 +25,20 @@ export const GET_REPOSITORY = gql`
     repository(id: $id) {
       ownerAvatarUrl
       fullName
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
       description
       language
       stargazersCount
