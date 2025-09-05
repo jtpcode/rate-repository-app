@@ -1,4 +1,5 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Button } from "react-native";
+import * as Linking from "expo-linking";
 
 import Text from "./Text";
 import theme from "../theme";
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ repository }) => (
+const RepositoryItem = ({ repository, showGithubButton = false }) => (
   <View testID="repositoryItem" style={styles.container}>
     <View style={styles.topRow}>
       <Image
@@ -88,6 +89,13 @@ const RepositoryItem = ({ repository }) => (
         <Text>Rating</Text>
       </View>
     </View>
+    {showGithubButton && (
+      <Button
+        title="Open in GitHub"
+        onPress={() => Linking.openURL(repository.url)}
+        color={theme.colors.primary}
+      />
+    )}
   </View>
 );
 
